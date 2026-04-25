@@ -209,7 +209,7 @@ impl GoveeUndocumentedApi {
             )
             .header("appVersion", APP_VERSION)
             .header("clientId", &self.client_id)
-            .heer("clientType", "1")
+            .header("clientType", "1")
             .header("iotVersion", "0")
             .header("timestamp", ms_timestamp())
             .header("User-Agent", user_agent())
@@ -390,7 +390,7 @@ impl GoveeUndocumentedApi {
 
         for c in catalog {
             for s in c.scenes {
-                if let Some(param_id) = s.light_effects.get(0).map(|e| e.scence_param_id) {
+                if let Some(param_id) = s.light_effects.first().map(|e| e.scence_param_id) {
                     options.push(EnumOption {
                         name: s.scene_name,
                         value: json!({
